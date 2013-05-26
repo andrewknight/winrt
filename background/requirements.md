@@ -1,0 +1,50 @@
+# Requirements for a complete port
+
+From the experiences gained with Qt on Metro, a few key details have been identified. Naturally, much of the work for Qt on WinRT is based on existing codepaths for Windows (Win32). Using this as a base, there are five key points to address in completing the port:
+- Create a platform abstraction (QPA) plugin to run Qt within the WinRT environment
+- Identify unsupported Win32 APIs and replace them with WinRT APIs
+- Provide third-party solutions for missing middleware such as the OpenGL
+- Tweak Qt's UI technologies for use with WinRT
+- Adjust the tooling to provide a "standard" Qt developer experience
+
+## Qt Platform Abstraction and Window Management
+In 2008, the Qt team released a product known as [Qtopia](/appendix/terms.md#qtopia), a Linux-based version of Qt without reliance on the commonly de-facto standard Unix windowing system, X11. This Qt port was renamed Qt for Embedded Linux after Nokia's acquisition of Qt in 2009. During that same year, Nokia worked on porting Qt to the [Symbian OS](/appendix/terms.md#symbian) as well, marking two new ports (eventually leading to two key platforms in Nokia's smartphone line) and considerable experience in how porting should be done. It was this knowledge that eventually led to a revamp in the entire porting strategy of Qt ports to come and the development of Qt Platform Abstraction ([QPA](/appendix/terms.md#qpa)). QPA allows for a common API to be used when authoring platform access to an operating system's window management services.
+
+A desktop window manager ([DWM](/appendix/terms.md#desktop-window-manager) is responsible for positioning, sizing, and compositing the windows of running applications with the desktop environment; key examples being Microsoft Windows, X11 (used on Linux/Unix variants), and Mac OSX. Embedded platforms - particularly embedded real time operating systems ([RTOS](/appendix/terms.md#rtos)) - may have a simplified window manager, or none at all. This was the primary use case for Qt for Embedded Linux - to provide a windowing system (Qt Windowing System - [QWS](/appendix/terms.md#qws)) where none was provided. QPA, which replaces QWS, does not require that the platform provides a concrete Desktop Window Manager ([DWM]) - only that it allows an abstract "window" to be created and drawn to. The platform implementer may can choose a number of options, from providing their own compositing window manager (e.g. by writing a [Wayland compositor](/appendix/terms.md#wayland)), to making window creation simple enough that "management" is not required (e.g. the [EGLFS](/appendix/terms.md#eglfs) technique). In the case of WinRT, basic window management is handled by the Modern UI environment; the WinRT Qt port needs to adapt to the features and constraints provided by this system.
+
+The Windows 8 Modern UI does not use a DWM in the traditional sense. Rather, it implements a tiled approach, in which application windows cannot be layered or composed atop one another. Instead, applications are typically displayed across the entire screen (one application at a time) with additional support for "filled" and "snapped" positions. Snapped applications use the full height of the screen, but are docked to one side of the screen with width fixed at 320 pixels. Filled applications simply consume the remaining space. So, applications are shown as single, top-level, fullscreen windows and which may be hidden or resized to a snapped or filled region only (and in the case of screens less than 1366 pixels wide, the window manager doesn't even allow snapping). The ability to snap applications allows for some basic cross-application use cases (such as drag-and drop) and the ability for applications to provide "[sidebar](/appendix/terms.md#sidebar)"-style use cases.
+
+<figure>
+    <img src="../images/snapped.png" alt="Snapped Application" /><br />
+    <figcaption>Windows Store apps can be fullscreen, snapped, or filled. Compared to a traditional desktop, window management and resizing is much simpler; Qt applications tend to be most useful with a single, top-level window.</figcaption>
+</figure>
+
+## Cleaning up the PIMPLs
+Even though QPA handles most of the platform-specific code for a given port, it does not cover every integration point in Qt. This is because much of Qt's codebase lives within private implementations ([PIMPLs](/appendix/terms.md#pimpl)) which do not fit into the QPA strategy. One of the reasons for this is that QPA is only used for GUI applications, and Qt supports non-GUI applications as well; hence, non-visual operations such as file I/O cannot be abstracted along with the rest of the port.  The existing Windows PIMPLs provide a solid foundation for these implementations, but it is to be expected that some of this implementation must be rewritten for WinRT.
+
+Depending on the difference of the platform compared to existing ports, this may be trivial or complex. In the case of Android, for instance, the core system worked easily because Android shares many of the same codepaths as Linux. For WinRT, the story was analogous; many of the existing Windows codepaths could work as-is. In fact, Windows Compact Embedded (CE) was already using the same approach: use Win32 when possible, and provide a different codepath when not. As a result, the basic procedure of picking working through the core portions of Qt were as follows:
+- Define a global platform define, Q_OS_WINRT, for use in conditional compilation. Q_OS_WIN is also defined here (as it is for all Windows platforms), and Windows Phone additionally defines Q_OS_WINPHONE. []
+- Find references to Win32 APIs that are not supported using WinRT. This can be done simply by attempting to compile Qt using the Windows 8 SDK with WINAPI_FAMILY set to WINAPI_FAMILY_APP, which causes the SDK headers to make only those APIs which are valid for WinRT to be visible. []
+- When possible, find a reasonable equivalent for the Win32 API. When not possible, mark the Qt API as unimplemented.
+- Test the functionality once everything can be compiled.
+
+## Addressing the issue of OpenGL
+As mentioned earlier, OpenGL is a graphics API that is a widely implemented standard for programming applications which take advantage of graphics hardware. On Windows, OpenGL can be accessed through the Windows GL (WGL) library, whereby the backing implementation is provided by a hardware vendor (e.g. Nvidia or AMD, depending on the graphics chipset). With WinRT, this library has been marked as a "legacy" graphics API[] and is not available for Windows Store applications. Instead, developers can use Direct3D 11, Microsoft's proprietary API for graphics acceleration. While this has the advantage that Microsoft is responsible for maintaining that Windows 8 devices ship with compatibile hardware, it breaks compatibility with code that relies on OpenGL. As Qt's primary UI toolkit, Qt Quick, is based on an OpenGL scene graph, this becomes a hard limit on making Qt Quick available on the platform.
+
+Fortunately, this issue has already been at least partially addressed by the Google Chrome team and their open-source library, ANGLE ([Almost Native Graphics Layer](/appendix/terms.md#angle)). ANGLE is an [OpenGL ES 2](/appendix/terms.md#opengl-es-2) implementation built upon Direct3D 9. It was created with the purpose of bringing hardware-accelerated graphics (primarily for the purpose of [WebGL](/appendix/terms.md#webgl)) to Windows PCs that lack a decent OpenGL implementation, but have an operational Direct3D implementation (primarily Intel integrated graphics hardware). ANGLE, particularly its experiemental Direct3D 11 branches, promises a gateway to running Qt Quick successfully on Windows 8 devices.
+
+## Working out UI details
+Once the aforementioned details are worked out (platform plugin, PIMPL, OpenGL), it should be possible to build user interfaces using Qt's existing graphics libraries, Qt Widgets and Qt Quick. From there, it needs to be evaluated what platform style changes are relevant for the new platform. Traditionally, Qt has offered style plugins for customizing the look-and-feel for a given platform (using the Qt Widgets platform). Styled widgets, however, have become less important with the introduction of the canvas-oriented Qt Quick UI framework. Until recently (Qt 5.1), styling Qt Quick components has been up to the developer. With the release of the Qt Quick Controls - a styled, supported Qt Quick component library - this is likely to change as includes a styling API for providing a platform look-and-feel to its components.
+
+Other UIs also exist beyond native look-and-feel of UI components. Context and system menus, for example, are typically defined by the operating system (and not necessarily painted by Qt). Windows 8 has introduces a few new UI concepts that need to be taken into consideration in this arena: popup menus, dialogs, and charms. Popup menus are typically used for contextual changes, and do not support nested menus like in previous versions of Windows. Dialogs are also quite similar to traditional desktop dialogs, but are styled differently and more strictly controlled by the platform (e.g. you cannot place custom widgets inside the dialog). Charms are yet another integration point that applications can use; they can be used for adding platform-consistent settings or search functionality to an application.
+
+<figure>
+    <img src="../images/dialogs.jpg" alt="Windows 8 Dialogs" />
+    <figcaption>Windows 8 has new UI integration points for improved consistency across applications. Left: Popup menu, normally used for contextual settings. Middle: Modal dialog. Right: Settings panel.</figcaption>
+</figure>
+
+
+## Addressing tooling
+Qt is more than a library - it is a collection of libraries and supporting tools. Because of this, simply porting Qt to a new platform is not enough to keep developers happy; the platform toolchain should be integrated with the common Qt Creator workflow. That is, developers should be able to write, launch, debug, and package their WinRT applications from the Qt IDE.
+
+

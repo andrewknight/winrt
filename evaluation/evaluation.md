@@ -1,0 +1,3 @@
+# Evaluation
+
+## To evaluate the success of the project, it is important to test both developers (the users of Qt) and end-users (the users of Qt applications). To test developers, a section of Qt developers participated in a survey which required them to download, install, and implement a simple application using Qt for WinRT. They were asked various questions about their experiences. To test users, a sample application was created with Qt for WinRT which mimmicked an "equivalent" sample from the Windows SDK. Some users were given the original sample while others were given the Qt version of the application. Their responses were gathered and compared.
