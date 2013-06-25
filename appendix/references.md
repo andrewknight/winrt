@@ -28,6 +28,9 @@ Howe, Denis. "cross-platform". February 24, 1998. http://foldoc.org/cross+platfo
 #### C as a universal language
 Dowling, Clay. "Using C for CGI Programming". _Linux Journal_. March 1, 2005. http://www.linuxjournal.com/article/6863
 
+#### Why I Created C++
+Stroustrup, Bjarne. _Big Think_. August 12, 2010. http://bigthink.com/videos/why-i-created-c
+
 #### Who writes for Linux?
 Corbet, Jonathan (LWN.net), Kroah-Hartman, Greg (The Linux Foundation), McPherson, Amanda (The Linux Foundation). "Linux Kernel Development: How Fast it is Going, Who is Doing It, What They are Doing, and Who is Sponsoring It". March 2012. http://go.linuxfoundation.org/who-writes-linux-2012
 
