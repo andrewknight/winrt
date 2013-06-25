@@ -26,4 +26,4 @@ Moving forward with Qt, it is important to note that WinRT is by no means the on
 
 It is this cross-platform story that Qt has developed relied upon and reinforced the past two decades that makes WinRT such a viable platform for use with Qt. The foundation and tooling are already there - only a few bricks and a bit of mortar are required to build up Qt (and Qt Quick) into a usable toolkit for use on WinRT devices. The remainder of this chapter documents the foundational elements of the port and what architectural challenges await.
 
-[Previous (Introduction)](../intro/intro.md) | [Next (Qt and the WinRT API)](#qt-and-winrt)
+[Previous (Introduction)](../intro/intro.md) | [Next (Qt and the WinRT API)](qt-and-winrt.md)
