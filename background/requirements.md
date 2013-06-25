@@ -39,7 +39,7 @@ Once the aforementioned details are worked out (PIMPLs, platform plugin, and Ope
 Other UIs also exist beyond native look-and-feel of UI components. Context and system menus, for example, are typically defined by the operating system (and not necessarily painted by Qt). Windows 8 has introduces a few new UI concepts that need to be taken into consideration in this arena: popup menus, dialogs, and charms. Popup menus are typically used for contextual changes, and do not support nested menus like in previous versions of Windows. Dialogs are also quite similar to traditional desktop dialogs, but are styled differently and more strictly controlled by the platform (e.g. you cannot place custom widgets inside the dialog). Charms are yet another integration point that applications can use; they can be used for adding platform-consistent settings or search functionality to an application.
 
 <figure>
-    <img src="../images/dialogs.jpg" alt="Windows 8 Dialogs" />
+    <img src="../images/integration-points.png" alt="Windows 8 Dialogs" />
     <figcaption>Windows 8 has new UI integration points for improved consistency across applications. Left: Popup menu, normally used for contextual settings. Middle: Modal dialog. Right: Settings panel.</figcaption>
 </figure>
 
