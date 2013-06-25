@@ -5,7 +5,7 @@
 Knight, Andrew. "Qt on Metro". October 5, 2011 (initial revision). http://projects.developer.nokia.com/qt_metro
 
 #### Tietoviikko Qt Coverage
-Sani, Ilari. "Löytääkö Qt uuden kodin Windows 8:sta?". _Tietoviikko_. December 16, 2011. http://www.tietoviikko.fi/kehittaja/article741411.ece
+Sani, Ilari. "Löytääkö Qt uuden kodin Windows 8:sta?" (Will Qt find a new home on Windows 8?). _Tietoviikko_. December 16, 2011. http://www.tietoviikko.fi/kehittaja/article741411.ece
 
 #### Initial Qt on WinRT Investigation
 Tranter, Jeff (KDAB). "Qt 5 on Windows 8 and Metro UI". June 6, 2012 (initial revision). http://qt-project.org/wiki/Qt-5-on-Windows-8-and-Metro-UI
@@ -20,13 +20,16 @@ Klient, Friedemann (Digia). "Port to Windows Runtime Kick-started". _Qt Blog_. F
 Knoll, Lars (Digia). "Introducting Qt 5.0". _Qt Blog_. December 19, 2012. http://blog.qt.digia.com/blog/2012/12/19/qt-5-0/
 
 #### Qt Statistics
-*More info needed* Macieira, Thiago (Intel). "Qt Project Statistics". http://www.macieira.org/blog/qt-stats/
+Macieira, Thiago (Intel). "Qt Project Statistics". http://www.macieira.org/blog/qt-stats/
 
 #### Free Online Dictionary of Computing
 Howe, Denis. "cross-platform". February 24, 1998. http://foldoc.org/cross+platform
 
 #### C as a universal language
 Dowling, Clay. "Using C for CGI Programming". _Linux Journal_. March 1, 2005. http://www.linuxjournal.com/article/6863
+
+#### Who writes for Linux?
+Corbet, Jonathan (LWN.net), Kroah-Hartman, Greg (The Linux Foundation), McPherson, Amanda (The Linux Foundation). "Linux Kernel Development: How Fast it is Going, Who is Doing It, What They are Doing, and Who is Sponsoring It". March 2012. http://go.linuxfoundation.org/who-writes-linux-2012
 
 #### Designing the Windows 8 Touch Keyboard
 Sinofsky, Steven. "Designing the Windows 8 touch keyboard". July 17, 2012. _MSDN Blogs_. http://blogs.msdn.com/b/b8/archive/2012/07/17/designing-the-windows-8-touch-keyboard.aspx
