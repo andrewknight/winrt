@@ -48,3 +48,4 @@ Other UIs also exist beyond native look-and-feel of UI components. Context and s
 Qt is more than a library - it is a collection of libraries and supporting tools. Because of this, simply porting Qt to a new platform is not enough to keep developers happy; the platform toolchain should be integrated with the common Qt Creator workflow. That is, developers should be able to write, launch, debug, and package their WinRT applications from the Qt IDE.
 
 
+[Previous: Qt & the WinRT API](qt-and-winrt.md) | [Next: Core Issues](../method/core.md)
