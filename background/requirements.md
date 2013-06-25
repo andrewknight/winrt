@@ -37,7 +37,7 @@ Fortunately, this issue has already been at least partially addressed by the ANG
 Once the aforementioned details are worked out (PIMPLs, platform plugin, and OpenGL), it should be possible to build user interfaces using Qt's existing graphics libraries, Qt Widgets and Qt Quick. From there, it needs to be evaluated what platform style changes are relevant for the new platform. Traditionally, Qt has offered style plugins for customizing the look-and-feel for a given platform (using the Qt Widgets platform). Styled widgets, however, have become less important with the introduction of the canvas-oriented Qt Quick UI framework. Until recently (Qt 5.1), styling Qt Quick components has been up to the developer. With the release of the Qt Quick Controls - a styled, supported Qt Quick component library - this is likely to change as includes a styling API for providing a platform look-and-feel to its components.
 
 <figure>
-    <img src="../images/integration-points.png" alt="Windows 8 Dialogs" />
+    <img src="../images/integration-points.png" alt="Windows 8 Dialogs" /><br />
     <figcaption>New integration points. Left: Popup (context) menu. Middle: Modal dialog. Right: Settings pane.</figcaption>
 </figure>
 
