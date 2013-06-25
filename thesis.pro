@@ -16,4 +16,5 @@ OTHER_FILES += \
     appendix/references.md \
     background/qt-and-winrt.md \
     images/start-screen.jpg \
-    background/requirements.md
+    background/requirements.md \
+    appendix/qtdoc.md

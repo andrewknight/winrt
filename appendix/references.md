@@ -34,5 +34,16 @@ Sinofsky, Steven. "Designing the Windows 8 touch keyboard". July 17, 2012. _MSDN
 #### Guidelines for snapped and filled views
 http://msdn.microsoft.com/en-us/library/windows/apps/hh465371.aspx
 
-#### Loading a DLL From Memory. Joachim Bauch. April 7, 2010.
+#### Loading a DLL From Memory. Bauch, Joachim. April 7, 2010.
 http://www.joachim-bauch.de/tutorials/loading-a-dll-from-memory/
+
+#### OPC: A New Standard For Packaging Your Data. Davis, Jack. August 2007. _MSDN Magazine_.
+http://msdn.microsoft.com/en-us/magazine/cc163372.aspx
+
+
+#### StackOverflow: Is Microsoft.SmartDevice.Connectivity properly COM-registered?
+http://stackoverflow.com/questions/3839947/is-microsoft-smartdevice-connectivity-properly-com-registered
+
+
+#### ANGLE Project: Windows 8 RT App Store Support. Issue discussion. Koch, Daniel (TransGaming Incorporated).
+https://code.google.com/p/angleproject/issues/detail?id=363

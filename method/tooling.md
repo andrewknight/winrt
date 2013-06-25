@@ -1,403 +1,92 @@
-# Qt as an SDK: a Holistic Approach
+# Qt: Tuning up the Tools
 
-Apart from the Qt libraries, an integrated development environment ([IDE](/appendix/terms.md#ide)), known as Qt Creator, is also an important part of the Qt Project. Qt Creator is a desktop application designed to aid in the development and debugging of Qt applications (although it can also be used as an IDE for any general software project). Its main strengths include the ability to manage a Qt project file (.pro file), invoke the corresponding tools (such as [qmake](/appendix/terms.md#qmake)), and launch interactive debugging sessions. It also has excellent code highlighting, navigation, and auto-completion facilities, particularly with QML code. While Qt can of course be used with the platform IDE, it aims to offer (and succeeds in offering[]) better productivity for the development of applications which are heavily Qt-based.
+Given the breadth of Qt's goals, it is no surprise that it comprises more than just libraries, but also a number of supporting tools. The most advanced of these is Qt Creator, the Qt integrated development environment ([IDE](/appendix/terms.md#ide)). Qt Creator is a desktop application designed to aid in the development and debugging of Qt applications (although it can also be used as an IDE for any general software project). It is able to manage a Qt project file (.pro file), invoke the corresponding tools (such as [qmake](/appendix/terms.md#qmake)), and launch interactive debugging sessions. It also has excellent code highlighting, navigation, and auto-completion facilities, standing out particularly well with support for Qt-based technologies like QML. It integrates well with other develompent tools, such as version control systems, and can be used for creating custom build routines. Qt Creator aims to offer a better overall development experience for Qt-based applications than found with other IDEs.
 
-In order to fully support a Qt workflow and developer experience, the tooling must also be adjusted. As such, two main contributions were made in order to solve the problem of WinRT development within the Qt environment:
-- plugin for Qt Creator to aid in the deployment and debugging for applications on the WinRT platforms
-- a deployment tool, winrtdeployqt, to aid in the packaging and installation of applications using Qt for WinRT
+With any new platform, some adjustments to tooling follow. In order to support tooling for the new platform, a plugin for Qt Creator (the Qt IDE) was created to aid in launching and debugging WinRT applications[]. Naturally, if the IDE supports the developer's workflow as well or better than the native tools, there will be an increased uptake and usage of the toolchain. Accordingly, it was imperative that the most important tasks provided by the native IDE (Visual Studio 2012) be supported in Qt Creator: registering the app, launching the app, and attaching the debugger.
 
+While Qt Creator supports several project types, qmake projects are the most common. In this project type, Creator parses the qmake project (.pro) file much like qmake would. It creates a project tree to allow the developer to visually traverse, organize, and edit their project. The developer can make build multiple build profiles - typically, one for each of their compilation targets - and set individual definitions or configuration options within each. Each build profile contains a settings pane for "Build" and "Run" to compile-time and run-time settings, respectively. For WinRT, the build system remains largely the same as Desktop Windows, so no changes were required in Qt Creator to handle this. Running applications, however, requires new procedures in WinRT, so this was where most of the Qt Creator plugin work was focused.
 
-## Qt as a Toolkit
-Even with the non-specific styling approach that Qt Quick offers, it is clear that developers are still interested in creating platform-styled UIs[][][]. For that reason, the [Qt Quick Controls](/appendix/terms.md#qt-quick-controls) add-on library was developed, with the intent of bringing much a widget-like API into Qt Quick, including a [new styling API](/appendix/references.md#qt-quick-styling) to give the flexibility and out-of-the-box platform look-and-feel back into Qt UI development. This brings the advantages of the scene graph and language features together with the traditional convenience of a platform look-and-feel. Existing desktop platform style plugins are reused, while new platforms (like WinRT) should utilize the new QML-based styling API.
+# Application Manifest Generation
 
+As noted earlier, the packaging system is guided by an application manifest, an XML file containing various metadata about the app. This includes both visual information, such as icons and colors, as well as requested capabilities, such as network or webcam access. While similar, Windows Phone apps use a different packaging convention than other Windows Runtime targets. Given the many options available, and the ease of error when editing the XML by hand, a unified manifest editor was created for Qt Creator (keeping pace with the native IDE, Visual Studio). As with all XML files opened in Qt Creator, the user may alternatively use the standard text editor to modify the file. The Appx manifest is based on Microsoft's public schema and the open packaging conventions [] and is therefore well-defined and well-suited to be edited by both the user and external tools. The Windows Phone manifest uses a different schema and file name (WMAppManifest.xml), but is also user-editable and follows a similar (albeit simpler) structure to the Appx manifest.
 
-In order to support tooling for the new platform, a plugin for Qt Creator (the Qt IDE) was created to aid in launching and debugging WinRT applications. Naturally, if the IDE supports the developer's workflow as well or better than the native tools, there will be an increased uptake and usage of the toolchain. Accordingly, it was imperative that the most important tasks provided by the WinRT native tool set (Visual Studio 2012) be supported in Qt Creator: registering the app, launching the app, and attaching the debugger. This work was encapuslated into a Qt Creator plugin, which has been submitted to the Qt Creator source repository[].
+As Qt project files are platform agnostic, platform-specific files like application manifests might typically be generated (e.g., by qmake) if all information is available in the project file. In cases where the files are complex or user-editable, however, this is beyond the scope of file generation. For this reason, it is the user's responsibility to create the manifest file, a paradigm already followed by the other mobile platforms suportted by Qt [][][]. There has been ongoing discussion about a "universal" manifest editor for Qt applications, but for now developers are expected to maintain a separate manifest for each platform. To this end, the user can create a new WinRT or Windows Phone 8 manifest file through the "Add New" action in either the File menu or the project's context menu; a wizard then appears which allows the file to be generated and the editor automatically opened. The manifest is also added to the project file. These file type associations (package.appxmanifest and WMAppManifest.xml) are mapped to a new manifest editor developed as part of the Qt Creator WinRT plugin [] which can read and write these XML files from a graphical tool.
 
-Qt Creator already provides advanced support for code editing and project management, so these existing capabilities needed no additional work. The missing details, however, are...
+<img of manifest editor, with one detail group open and the rest collapsed>
 
-# Project Creation
-As mentioned in chapter XXX[], reusing the qtwinmain library allowed for WinRT applications to require no additional initialization code as compared to Qt applications on other platforms. After a series of patches from the Qt community [], qmake also gained support for generating proper makefiles for the build system. The remaining detail was to provide automatic generation of the "Application Manifest"[] and allow it to be registered from the IDE.
+The manifest editor consists of a series of collapsible "detail groups" modeled after Qt Creator's "Projects" pane. Grouping similar details and making the groups collapsible allows the user to manage the visibility of a moderate number of options without requiring additional search tools. It may also have an advantage over tabbed-based views (such as Visual Studio's editor) in that the user may have more than one detail group visibile within the same view. Furthermore, it allows for expansion of the editor (such as adding more detail groups) without the risk of running out of horizontal screen space (as would be the case of a tabbed view). It is also consistent with other parts of Qt Creator.
+
+<figure>
+    <img src="../images/package-editor.png" alt="Package Editor" /><br />
+    <figcaption>Qt Creator Package Manifest Editor, Packaging Details</figcaption>
+</figure>
+
+Perhaps the most important detail group in the manifest editor is the packaging tool. It provides the user with the most basic elements to modify: the project name, publisher information, and architecture information. Filling this detail group ensures that the minimally required elements are specified. Furthermore, validators are in place on all fields so that the user can be made aware of any potential errors within their input.
+
+<figure>
+    <img src="../images/tile-editor.png" alt="Package Editor" /><br />
+    <figcaption>Qt Creator Package Manifest Editor, Tile Details</figcaption>
+</figure>
+
+Another helpful graphical aid in the manifest editor is the tile details group, which visualizes the tiles' look and feel on the Windows Start Screen. This tool aims to provide a benefit over the Visual Studio offering, which does not visualize the tile itself (and therefore requires the user to install the application to view the tiles in action). From Qt Creator, the user can modify the various visual properties of the tiles (background color, icon, label) and immediately see how the tile will appear on the Start Screen. The user can even interact with the icon to get a simulation of the "tilt" animations which occur when pressing a tile within the Modern UI.
+
+<figure>
+    <img src="../images/dependency-editor.png" alt="Tile Editor" /><br />
+    <figcaption>Qt Creator Package Manifest Editor, System Details</figcaption>
+</figure>
+
+Another crucial view is the System details view, where the user can modify the permissions and hardware support required on the end-user device. Capabilities are essentially permissions for the application to access the user's media library, network, and other software resources. Requirements also act like permissions to hardware resources, but have the added constraint that the user's device must also support such features (for example, a phone must have NFC support for the "Proximity" requirement). Dependencies are software packages which must be installed with the application in order for it to work, such as software frameworks. The package management system enables download and installation of these frameworks automatically. This is especially important for Qt, as it will eventually allow the Qt Project (or even third-party developers, for that matter) to distribute official binary packages for applications to rely on, easing development and licensing concerns considerably.
+
+While providing a graphical manifest editor is not a strict requirement for creating a usable Qt experience on WinRT, it should prove beneficial to helping developers tackle this platform-specific detail without significant new learning. The tooltips and error messages are designed to aid the developer in understanding what each component of the package manifest is modified and what it will affect in the application at installation and runtime.
 
 # Application Registration and Launch
-The existing UI mechanism for launching local applications in Qt Creator is through the Application Launcher<>. The default launcher requires a path to the executable and allows the user to change arguments, the working directory, and optionally run the application within a terminal. As WinRT does not allow direct instatiation of the executable, the executable path and working directory were naturally marked as disabled (though with the real paths still marked within the existing UI). Arguments were left available (as there are useful in testing) as the debugger allows for arguments to be passed to the application (even though there is no way to do this through an installed application's shortcut).
+After the developer has an application and corresponding manifest, they may register the app and launch it. The Qt Creator plugin makes this possible all from within the IDE. In the Run settings pane, Qt Creator creates a default "run configuration" for launching the application locally; this typically contains a target executable and working directory. As Windows Store apps cannot be directly launched, these fields were removed and replaced with an "Activation ID" field[]. This activation ID is the same identifier used with the Appx PowerShell commands[] or the PLMDebug tool[]. As it is not likely that the user will know the ID, a "Find..." button is available for picking the application from a list. Inside the application picker, the user can filter out the name of their application. The "arguments" was left available, as the debugger allows for arguments to be passed to the application.
 
-In order to launch the app, it must be registered with the Appx package system, so some extra elements were added to the form in order to ease this process. Following the UI precedent set by the "shadow build" feature[] of Qt Creator, the launch path is highlighted in red if the system detects that the application has not been registered, and displays a message warning the user that the app is not registered, and offering a text link to "Register the app". Upon clicking the link, the text is temporarily grayed-out (disabled) and the gerneral messages window is brought into focus. Qt Creator invokes the proper PowerShell "cmdlet" to register the application, and then checks the output to make sure the application is registered successfully.
+<figure>
+    <img src="../images/appx-launcher.png" alt="Appx Launcher" /><br />
+    <figcaption>Qt Creator WinRT Application Launcher</figcaption>
+</figure>
 
-After successful registration (and in all cases where the application is detected as already registered), the registration text changes to a new message containing some of the registration details of the application (e.g. application unique ID). Furthermore, a text link appears allowing the user to unregister the app; activating the link performs the converse of the task above: the output window appears and the output of the unregistration script is shown. Upon successful unregistration, the registration text in the launcher UI is reverted to the state described in the previous paragraph.<>
+In order to launch the app, it must be registered with the Appx package system, so some extra elements were added to the form in order to ease this process. The first time the user arrives at this view, their application will neither be visible in the "Activation ID" field, or available in the "Select Appx Package" dialog[], which is available by clicking "Find..." next to the Activation ID field. If they try to launch their application without first choosing an application, the Select Appx Package dialog is automatically opened. At this point, the user should select a previously registered application, or register their application with the system by clicking "Add...". When adding an application, a file dialog appears and directs them to find their application manifest. This may be a point of confusion for developers, as it may not be immediately obvious that they need to create an application manifest manually. <<<To resolve this, the file dialog allows for creating a new file, and opens up the Appx manifest editor automatically.>>> If an error occurs, the error message is displayed in an alert dialog. The Windows-provided errors are normally sufficient for debugging, as they explain if e.g. a file is missing. In the special case that there is no developer license installed (or the license has expired), the dialog asks if the user would like to launch the developer registration tool[].
 
-If an error condition is recognized in either step (registration/unregistration), the launcher UI does not change (apart from moving from temporarily disabled to enabled). Rather, the typical error message notification appears in the output window as specified by the Qt Creator UI style guide []. The user is able to see the output of the registration script and is met with appropriate indicators from the application's user interface.<>
-
-A reference of the required PowerShell commands to perform registration and unregistration, as well as the registry keys used to determine registration status, are available in appendix XXX [].
-
+While a "normal" installation of an Appx package copies itself to a central directory, this "registration" is done in-place. That way, the developer can continue to modify the same files (e.g. images or QML) without re-installing the application. After successful registration (and in all cases where the application is detected as already registered), the Activation ID is filled with the ID obtained from the Appx selection dialog. This activation ID can be useful, as it can be used in the Appx management PowerShell commandlets[]. At this point, the user is ready to launch the application - they simply hit the "Run" or "Debug" buttons in Qt Creator (or use the associated shortcut keys). Internally, the IApplicationActivationManager[] API is used to launch the application. The user may reopen dialog again if they wish to choose a different application; they may also perform some application-specific settings - such as unregister or open appx manifest - through the appx context menu.
 
 # Application Debugging
-The Windows launcher API can be used to start, stop, suspend, and awake Appx packages[]. Upon launch, the process identifier (PID) of the app is passed back to the launcher. While a separate API exists for attaching to debug events[], it is also possible to attach a stand-alone debugger using the PID. In the early stages of the project, the first option was used in order to easily obtain application debug output. As the project evolved, it was clear that the standalone debugger would be much more practical, as all of the code for this was already written (and integrated with Qt Creator) via the CDB plugin. For non-debug runs (launching the app in "normal" mode), the first version is used through the existing OutputDebugString thread instance. Some modification was made in order to receive the events for the current PID, and this was upstreamed to the Qt Creator source repository[] prior to the commit of the rest of the plugin.
+Once the application is launched, the process identifier (PID) of the app is passed back to the launcher. This PID can be used to monitor the application's lifetime and also forcefully terminate it. Most importantly, though, it can be passed to a debugger. As Qt Creator already supports the Windows command-line debugger (CDB), this is also used in debugging local WinRT applications. After launching the application, Qt Creator instructs CDB to attach to the running process. Qt Creator even includes built-in visualizers for debugging Qt types, giving it an edge over the native toolchain in that regard. Since WinRT applications run in fullscreen, it is wise to employ a multi-monitor setup in order to see both the application and the debugger at the same time.
 
-When the user launches the application in debug mode, the CDB debugger is attached to the running process the same as a normal Windows application. To acheive this, the Qt Creator plugin added hooks into the existing CDB plugin. Using this, the user can set breakpoints and examine the threads, call stack, variables, and other features provided by the Qt Creator debug mode.
+<image of debugging - show both screens, point out that multiple monitors might be a good idea>
 
-# Appx Manifest
-XQuery - xmlpatterns/xmlvalidator
+While local debugging was implemented rather easily[], remote debugging is an important task that is yet to be finished. Microsoft has unified their remote debugging solution for WinRT through an application called "msvsmon", the Visual Studio Remote Debugging Monitor. It is a service which runs on the client device (the debuggee) and allows a remote machine to launch interactive debugging sessions. Rather than the existing remote debugging protocol used by CDB and WinDebug (supported by Qt Creator), msvsmon uses Windows Web Services (WSSAPI)[] to communicate over-the-wire[]. This may not be a complete loss, as WSSAPI applications rely on a schema which can be implemented in a client-agnostic manner. Unfortunately, Microsoft has not made this schema public, making it difficult to interface with msvsmon unless this schema can be made available.
+
+### Remote Debugging Insights
+In order to understand the relationship between Visual Studio and the various debugging targets (x86 PC, x86 64-bit PC, ARM tablet, x86 Phone Emulator, and ARM Phone), a deeper investigation was required. Through the use of a network monitor (and guidance from the Windows Phone Power Tools project[]), it was observed that for the emulator and phone, CoreCon[] (a public .NET API) version 11 (version 10 is used with Windows Phone 7, and earlier versions with Windows CE) is used to facilitate communication with the remote device. The CoreConnectivity API was also tested locally[], and found to be integratable into Qt Creator via the Common Language Runtime ([CLR](/appendix/terms.md#clr)), but that would introduce some inherent "messiness" when dealing with mixed native and managed code. Also, not all assemblies have 64-bit versions, restricting potential Qt Creator builds to 32-bit only. Thankfully, the Visual Studio 2012 Update 2 release added a command-line tool, XapDeployCmd[], which covers the use cases of CoreCon without requiring using the API directly (and being a more natural fit for Qt Creator's mentality of controlling external applications).
+
+<image of phone emulators>
+
+A major limitation of XapDeployCmd (as well as CoreCon) is the lack of debugging features; it simply offers a way to install, remove, and launch applications. Given this limitation, it is understandable that Visual Studio might use separate tools to launch debug sessions. As it turns out, this is the case: observation of local network traffic showed that Visual Studio installs and launches msvsmon via CoreCon's RemoteAgent[] API (based on the known port number and observed plaintext transfer). The debugging monitor then listens on its normal port, 4016, for Visual Studio to attach to. From there, all communication is done through the msvsmon WSSAPI; debugging objects are passed to Visual Studio and interpreted. This paradigm of deploying and launching the debugger provides potential insight into how Qt Creator might be able to accomplish a similar setup; perhaps even to deploy a third-party debugging helper or remote debugging server.
+
+For non-phone devices, CoreCon is not used in this debugging pipeline (it is a device service which only runs on embedded targets). Rather, msvsmon must be installed manually to the device; it is available as part of the Windows Remote Debugging Tools from Microsoft[]. Once installed, the service is either started manually or configured to run in the background. The debugging session then takes place over the network through Visual Studio, which authenticates with optional encryption[]. With encryption disabled, the traffic between the debugger and debuggee appeared similar in nature to that of the emulator - that is, XML transactions using the WSSAPI. To reiterate, the ability for Qt Creator to remotely debug these devices lies in the capability to interact with this WSS service, something which is currently not an open API.
+
+< img of phone deployment >
+
+While debugging is not yet possible, remote deployment for phone (and phone emulator) was added to the Qt Creator plugin by creating deployment steps for XapDeployCmd[]. This means that a developer will typically still need to launch Visual Studio if they want an interactive debugging session. For non-phone devices, one potential solution would be to support SSH/SFTP (as is done for Linux devices) or e.g. the Windows Remoting API[]. That way, CDB could be launched and the existing CDB debugging engine could attach to the session. This, however, doesn't cover ARM devices, which still lack a working solution. As this problem is yet to be solved for Desktop Windows, it may be that a unified approach (including, perhaps deployment from other operating systems) will be attempted in the future.
+
+< img of simulator - requires more investigation >
+
+In addition to the Windows Phone Emulators, there is also the Windows 8 Simulator. This simulator is essentially a remote desktop client which is logged into the host, providing a mechanism for simulating tablet features such as touch events and rotation. While launching the simulator is possible, the process of launching the application and attaching a debugger has not yet been investigated. It is quite likely that remote desktop scripting APIs could be used to instruct the application to launch with a debugging server attached, and Qt Creator could connect over the local network, much like is done for normal local applications.
 
 # Application Packaging
+Once the application is ready to publish - or, at least, ready to send to a colleague for testing - it should be packaged. As opposed to tradtional desktop applications, where the developer was responsible for creating an interactive installer, Microsoft provides the packaging and installation system. For non-phone, this is handled by Appx, based on the Open Packaging Conventions[]. Phone devices use the same packaging convention from Silverlight and WP7, XAP (although with some new schema elements added for WP8-specific features). In addition to Visual Studio, Microsoft provides both a command-line tool (makeappx.exe)[] and a C API [] for packaging apps. XAP packages, however, must be made manually if not done by Visual Studio. In both cases, the packages are simply ZIP archives with a certain file structure inside, so they are simple to implement without third-party tools.
 
-In addition to Visual Studio, Microsoft provides both a command-line tool (makeappx.exe) for packaging apps and a C API []. Like the other integration points in Qt Creator, the invokation of command-line tools tend to be the simplest to implement and most in-line with the spirit and utility of qmake. So, like the Appx Manifest generator, this tooling was completed using a qmake feature that invokes makeappx.exe.<>
+Because Qt libraries must be packaged with the application (as well as other files marked for deployment), a need for a tool that can read the generated binary and copy the associated libraries needed to be developed. The result was windeployqt, a tool made by Friedemann Kleint. The vision of the tool is to ease the burden of copying DLLs not only for WinRT applications, but Windows applications in general. Contributions were made to the tool to support automated packaging of Appx and XAP packages[], improving the tool further. To round out the usefulness of the tool, automatic deploy steps were added to Qt Creator to make use of the tool easy for users of the IDE[].
 
-Because Qt libraries must be packaged with the application (as well as other files marked for deployment), the feature generates a directory file which contains absolute paths to all of the needed DLLs, plugins, and resources such as images. Before passing this file to makeappx.exe, all files are copied to the build directory, which has the added value that the build directory can also be registered in-place.
+<image of deploy steps>
 
 ## Signing
-...
-
-
-## Debugging Insights
-- Local
-- Remote
-- CDB vs ARM debugger
-
-Content..h3.
- 2013-04-04 - An
-drew Knight - De
-bugging insights
-..h4. Local..Loc
-al debugging wit
-h the Qt Creator
- WinRT plugin is
- already usable
-because CDB atta
-ches to the proc
-ess fine using t
-he existing CDB
-engine. I did no
-tice that you mu
-st change the de
-bugger to x86 wh
-en debugging 32-
-bit apps or it d
-oesn&#39;t work
-(the default sel
-ected CDB is the
- 64-bit one). An
-other issue is t
-hat the app can
-get pretty far b
-efore the debugg
-er attaches, so
-you can use the
-following code t
-o &quot;wait for
- the debugger&qu
-ot;:http://msdn.
-microsoft.com/en
--us/library/wind
-ows/desktop/ms68
-0345(v=vs.85).as
-px :..@while (!I
-sDebuggerPresent
-()) ; // wait@..
-Another potentia
-l solution to th
-e problem is to
-instruct the app
-lication to laun
-ch a CDB debuggi
-ng server when t
-he app starts. T
-his can be done
-using &quot;IPac
-kageDebugSetting
-s&quot;:http://m
-sdn.microsoft.co
-m/en-us/library/
-hh438393.aspx .
- The WinRT Qt Cr
-eator plugin wou
-ld just need to
-instruct CDB to
-attach to the re
-mote server and
-everything shoul
-d be the same (u
-ntested). This s
-etting is persis
-tent, so it woul
-d need to be cle
-ared after every
- debugging sessi
-on (or the debug
-ging server will
- launch every ti
-me the app is la
-unched)...h4. Re
-mote..&quot;Stan
-dard&quot; remot
-e debugging on a
-ll WinRT platfor
-ms is done throu
-gh msvsmon (avai
-lable in the &qu
-ot;Visual Studio
- Windows 8 Remot
-e Tools&quot;:ht
-tp://msdn.micros
-oft.com/en-us/li
-brary/hh441469.a
-spx#BKMK_Install
-). It is a WSDL
-service that run
-s on the remote
-device which rel
-ays all the debu
-gging data to Vi
-sual Studio usin
-g Visual Studio
-managed data typ
-es (original res
-earch based on i
-nspecting the ne
-twork packets).
-It runs on port
-8016, and appear
-s to be running
-on the phone whe
-n connected via
-USB and the scre
-en is unlocked (
-you can see this
- by running C:\P
-rogram Files (x8
-6)\Common Files\
-Microsoft Shared
-\Phone Tools\Cor
-eCon\11.0\Bin\Ip
-OverUsbEnum.exe)
-. For the emulat
-or, it seems it
-does not start u
-ntil Visual Stud
-io has instructe
-d it to do so, p
-resumably by lau
-nching msvsmon t
-hrough the &quot
-;Add-on Package
-API&quot;:http:/
-/msdn.microsoft.
-com/en-us/librar
-y/bb513877.aspx
-. In other words
-, the only way Q
-t Creator would
-be able to do us
-e these debugger
-s would be to fi
-gure out how to
-speak the langua
-ge of msvsmon, w
-hich would likel
-y require using
-Visual Studio as
-semblies and be
-both hackish and
- have questionab
-le legal status.
-..Interestingly,
- the phone state
-s that it is run
-ning a separate
-debugging servic
-e on localhost:8
-888. I was not a
-ble to connect t
-o this port usin
-g CDB, so I&#39;
-m not sure what
-type of service
-this is. While I
- did not get aro
-und to sniffing
-the localhost tr
-affic (the USB d
-evice is bound t
-o the loopback,
-not a private IP
- like XDE is), i
-t was clear from
- the VS-XDE traf
-fic that there i
-s no separate de
-bugger for XDE;
-all traffic come
-s from msvsmon.
-Assuming we can&
-#39;t (or don&#3
-9;t want to) use
- msvsmon, we nee
-d to use (or bui
-ld) a different
-debug helper/ser
-ver...h4. Remote
- debugging on x8
-6/X64..Since CDB
- runs on the des
-ktop platforms,
-it should be pos
-sible to remote
-debug like desri
-bed in the &quot
-;Local&quot; sec
-tion. Qt Creator
- already support
-s connecting to
-a remote CDB ses
-sion, so there w
-ould just need t
-o be a helper ap
-plication on the
- remote client t
-o perform the ap
-plication launch
- and initial att
-achment (using t
-he same APIs alr
-eady used for lo
-cal Appx debuggi
-ng in Qt Creator
-)...h4. Remote d
-ebugging on ARM,
- XDE (Emulator),
- and Windows Pho
-ne..Since these
-platforms do not
- have CDB, IPack
-ageDebugSettings
-, or the Package
-Manager API, the
-y need to use a
-different mechan
-ism. The &quot;C
-oreConnectivity
-API&quot;:http:/
-/msdn.microsoft.
-com/en-us/librar
-y/bb545992.aspx
-is available on
-at least XDE and
- Phone (unsure a
-bout WinRT ARM d
-evices as I don&
-#39;t have one t
-o test). It is a
-n RPC service wh
-ich appears to r
-un on port 6791
-and is used by V
-isual Studio to
-communicate with
- the emulator or
- physical device
-. There are seve
-ral .NET assembl
-ies (Microsoft.S
-martDevice.*) wi
-th a high-level
-API that do most
- of the work for
- you. These asse
-mblies are inclu
-ded with the Win
-dows Phone 8 SDK
-, or more specif
-ically the &quot
-;Windows 8 Phone
- SDK 8.0 Assembl
-ies&quot; packag
-e available on t
-he Windows Phone
- 8 ISO under pac
-kages/MobileTool
-s/wpsdkcore. Whi
-le documentation
- for the API has
-n&#39;t been upd
-ated since VS200
-8, usage example
-s are available
-from &quot;Windo
-ws Phone Power T
-ools&quot;:https
-://wptools.codep
-lex.com/ and thi
-s &quot;SO post&
-quot;:http://sta
-ckoverflow.com/q
-uestions/1342073
-3/connect-to-win
-dows-phone-8-usi
-ng-console-appli
-cation, or simpl
-y by using a .NE
-T reflector to i
-nspect the assem
-blies...I manage
-d to build a sim
-ple app using th
-ese APIs (C++/CL
-I so the managed
- portions can be
- compiled separa
-tely) which was
-able to enumerat
-e the devices an
-d launch XDE ins
-tances. It shoul
-d also be possib
-le to install/up
-date/uninstall a
-pps as well as l
-aunch/terminate.
- Unfortunately,
-I don&#39;t see
-many options for
- debugging. It s
-eems it may be p
-ossible to use t
-he Add-on packag
-e API to launch
-a non-packaged a
-pplication (i.e.
- a debugger) tha
-t runs with priv
-ileges that allo
-w access to the
-network and the
-running applicat
-ions...h4. Summa
-ry..(Remote) deb
-ugging with CDB
-on WinRT desktop
- platforms shoul
-d just require l
-aunching CDB as
-a server and hav
-ing Qt Creator c
-onnect to it (th
-is may require a
- helper applicat
-ion on the remot
-e device to actu
-ally launch the
-app). For ARM, P
-hone, and XDE (w
-hich is actually
- an x86 virtual
-machine), it see
-ms we need to fi
-nd another route
-, as the standar
-d debugger is ms
-vsmon which is d
-esigned to work
-with Visual Stud
-io only....
+The application should be signed!
 
 
 
+## Conclude
+
+While not all use cases are yet covered, it is encouraging to see that Qt Creator can be used for most of the development workflow. Developers can create, register, launch, locally debug, and even package their applications using the IDE. From this foundation, it should be possible to evaluated the developer experience offered by the IDE and platform port when working with WinRT devices.
