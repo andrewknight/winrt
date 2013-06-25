@@ -22,6 +22,9 @@ Knoll, Lars (Digia). "Introducting Qt 5.0". _Qt Blog_. December 19, 2012. http:/
 #### Qt Statistics
 Macieira, Thiago (Intel). "Qt Project Statistics". http://www.macieira.org/blog/qt-stats/
 
+#### Qt Lighthouse has Grown Up Now
+Tvet, Paul Olav (Nokia/Digia). _Qt Blog_. May 31 2011. http://blog.qt.digia.com/blog/2011/05/31/lighthouse-has-grown-up-now/
+
 #### Free Online Dictionary of Computing
 Howe, Denis. "cross-platform". February 24, 1998. http://foldoc.org/cross+platform
 
