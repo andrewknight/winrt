@@ -160,6 +160,9 @@ A UI component or desktop area, typically on the side of the screen, which provi
 #### STL
 C++ Standard Template Library
 
+#### SWT
+Standard Widget Toolkit, a Java library providing an abtraction for native widgets.
+
 #### User Interface
 The space where interaction between a human and machine occurs.
 
