@@ -9,8 +9,8 @@
 1. Method
   1. [Core Issues](method/core.md)  
   1. [Platform Abstraction](method/qpa.md)
-  1. [OpenGL](method/opengl.md)
-  1. [UI Technologies](method/ui.md)
+  1. [OpenGL & QtQuick](method/opengl.md)
+  1. [Other UI Integration](method/ui.md)
   1. [Qt Creator & Tooling](method/tooling.md)
 
 1. Evaluation
