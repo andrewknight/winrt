@@ -10,6 +10,15 @@ A provider of microprocessor specifications commonly used in mobile & embedded C
 #### Appx
 A packaging and application container standard used for [Windows Runtime](#winrt) applications.
 
+#### ActionScript
+A high-level programming language based on [JavaScript](#javascript) for use within [Adobe Flash](#adobe-flash) and other projects, such as the Tamarin virtual machine.
+
+#### Adobe Flash
+A runtime environment (virtual machine) used in the Adobe Flash player and Adobe Air cross-platform framework.
+
+#### Adobe Flex
+A declarative toolkit for creating GUIs within the [Adobe Flash](#adobe-flash) runtime.
+
 #### C++11
 The latest revision of the C++ language and [STL](#stl) standard.
 
@@ -33,6 +42,15 @@ Graphical User Interface, a visual (image-based) [user interface](#user-interfac
 
 #### I/O
 Input/output, pertaining to data transfer over an interface.
+
+#### Java
+A high-level programming language (typically) utilizing a virtual machine.
+
+#### JavaFX
+A declarative syntax for creating GUIs within the Java graphics engine. JavaFX 1 influenced the syntax chosen for [QML](#qml).
+
+#### JavaScript
+An interpreted programming language resembling C (and to some extent, C++ and Java) and formalized as ECMAScript/ECMA-262. The standard "language of the Web", it is used in web browsers as well as many other applications (such as [QML](#qml)).
 
 #### look and feel
 The styling and behavior of a [user interface](#user-interface) elemement or environment, typically defined by the platform style guide.
