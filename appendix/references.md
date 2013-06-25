@@ -31,6 +31,9 @@ Dowling, Clay. "Using C for CGI Programming". _Linux Journal_. March 1, 2005. ht
 #### Who writes for Linux?
 Corbet, Jonathan (LWN.net), Kroah-Hartman, Greg (The Linux Foundation), McPherson, Amanda (The Linux Foundation). "Linux Kernel Development: How Fast it is Going, Who is Doing It, What They are Doing, and Who is Sponsoring It". March 2012. http://go.linuxfoundation.org/who-writes-linux-2012
 
+#### Validated Toolchain on Mars Rover
+NASA Jet Propulsion Laboratory. "VxWorks on the Mars Exploration Rovers". http://trs-new.jpl.nasa.gov/dspace/bitstream/2014/37779/1/05-0825.pdf
+
 #### Designing the Windows 8 Touch Keyboard
 Sinofsky, Steven. "Designing the Windows 8 touch keyboard". July 17, 2012. _MSDN Blogs_. http://blogs.msdn.com/b/b8/archive/2012/07/17/designing-the-windows-8-touch-keyboard.aspx
 
