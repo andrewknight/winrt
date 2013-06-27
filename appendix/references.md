@@ -59,3 +59,7 @@ http://stackoverflow.com/questions/3839947/is-microsoft-smartdevice-connectivity
 
 #### ANGLE Project: Windows 8 RT App Store Support. Issue discussion. Koch, Daniel (TransGaming Incorporated).
 https://code.google.com/p/angleproject/issues/detail?id=363
+
+
+#### Ayufan: Qt 5 and WinRT
+Trzciński, Kamil. February 2013. _ayufan's site_. http://ayufan.eu/projects/qt5-windows-phone-8/
