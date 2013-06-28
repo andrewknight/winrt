@@ -1,16 +1,14 @@
 # Requirements for a complete port
 
-From the experiences gained with Qt on Metro and a wide range of existing QPA plugins to use as examples, a porting strategy for WinRT can be devised. Naturally, the "parent platform" for WinRT is Windows - much like Linux is the parent platform for Android and Mac OS is the parent platform for iOS. In other words, the parent platform already provides most of the platform-dependent codepaths; the child platform is essentially an adjustment to this. Using this as a base, there are five key points to address in completing the port:
-- Identify unsupported Win32 APIs and replace them with WinRT APIs
-- Create a platform abstraction (QPA) plugin to run Qt within the WinRT environment
-- Provide third-party solutions for missing middleware such as the OpenGL
-- Tweak Qt's UI technologies for use with WinRT
-- Adjust the tooling to provide a "standard" Qt developer experience
+From the experiences gained with Qt on Metro and a wide range of existing QPA plugins to use as examples, a porting strategy for WinRT becomes clear. Considering the platform details and Qt integration aspects discussed in the previous sections, there are five key points to address in completing the port:
+- Identify unsupported Win32 APIs and replace them with WinRT APIs.
+- Create a platform abstraction (QPA) plugin to run the Qt event loop and graphics system within the WinRT environment.
+- Provide third-party solutions for missing middleware such as the OpenGL.
+- Tweak Qt's UI technologies for use with WinRT (theming and native look-and-feel).
+- Adjust the tooling to provide a standard Qt developer experience.
 
 ## Internal Details
-Even though QPA handles most of the platform-specific code for a given port, it does not cover every integration point in Qt. This is because much of Qt's codebase lives within private implementations (PIMPLS) which do not fit into the QPA strategy. One of the reasons for this is that QPA is only used for GUI applications, and Qt supports non-GUI applications as well; hence, non-visual operations such as file I/O cannot be abstracted along with the rest of the port.  The existing Windows PIMPLs provide a solid foundation for these implementations, but it is to be expected that some of this implementation must be rewritten for WinRT.
-
-As discussed, the WinRT port shares parallels with other platforms which codepaths with "parent" platform. In fact, Windows Compact Embedded (CE) is already using the same approach: it utilizes Win32 when possible, and provides a different codepath when not. As a result, the basic procedure of picking working through the core portions of Qt can be described as follows:
+Even though QPA handles most of the platform-specific code for a given port, it does not cover every integration point in Qt. This is because much of Qt's codebase lives within private implementations (PIMPLS) which do not fit into the QPA strategy. One of the reasons for this is that QPA is only used for GUI applications, and Qt supports non-GUI applications as well; hence, non-visual operations such as file I/O cannot be abstracted along with the rest of the port. Naturally, the "parent platform" for WinRT is Windows - much like Linux is the parent platform for Android and Mac OS is the parent platform for iOS. In other words, the parent platform already provides most of the platform-dependent codepaths; the child platform is essentially an adjustment to this. Using this as a base, the Windows PIMPLs provide a solid foundation for these implementations, but it is to be expected that some of this implementation must be rewritten for WinRT. As a result, the basic procedure of picking working through the core portions of Qt can be described as follows:
 - Define a global platform macro (i.e. Q_OS_WINRT) for use in conditional compilation. Q_OS_WIN acts as the parent define, being defined as it is for all Windows platforms. Additional conditions for Windows Phone can be handled with Q_OS_WINPHONE.
 - Find references to Win32 APIs that are not supported using WinRT. This can be done simply by attempting to compile Qt using the Windows 8 SDK. The SDK provides a macro, WINAPI_FAMILY, which defines which APIs are allowed for which particular Windows platforms. WinRT applications may set this to WINAPI_FAMILY_APP, which hides all unsupported APIs from the headers and results in compilation errors when they are used.
 - When possible, find a reasonable equivalent for the Win32 API. When not possible, mark the Qt API as unimplemented.
