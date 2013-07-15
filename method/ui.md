@@ -2,18 +2,15 @@
 
 ## Platform Menus and Dialogs
 QPA, apart from offering the low-level glue between the platform and Qt, also provides some styling features as well. These features remain agnostic to Qt's GUI component offerings (that is Widgets and Quick) and are mainly used to create native menus and integration points. WinRT has a few of these:
-- Popups
- The Popups API[] is used for displaying message dialogs and context-sensitive menus. QPA has some integration suppport for these, but is unfortunately incomplete in terms of mapping all use cases between WinRT can Qt. For example, it Qt supports embedding arbitrary widgets within dialogs and menus - something which is not supported in WinRT. For common use cases, however, it could be feasible to enable native menus within applications. These experimental features were added[], but not enabled by default.
+- *Popups*: The Popups API[] is used for displaying message dialogs and context-sensitive menus. QPA has some integration suppport for these, but is unfortunately incomplete in terms of mapping all use cases between WinRT can Qt. For example, it Qt supports embedding arbitrary widgets within dialogs and menus - something which is not supported in WinRT. For common use cases, however, it could be feasible to enable native menus within applications. These experimental features were added[], but not enabled by default.
 
     <image showing native popup, dialog>
 
-- Pickers
- One of the native integration points in QPA is the native dialog - implementers can use it to provide a platform-specific version of font, color, or file dialogs. WinRT has support for file picking, though not color or font. Since file location likely will not work outside of the App sandbox, it was important to implement this feature. Qt applications can simply create a QFileDialog, and the correct native FilePicker will be launched. This is provided through the Windows.Storage.Pickers[] API.
+- *Pickers*: One of the native integration points in QPA is the native dialog - implementers can use it to provide a platform-specific version of font, color, or file dialogs. WinRT has support for file picking, though not color or font. Since file location likely will not work outside of the App sandbox, it was important to implement this feature. Qt applications can simply create a QFileDialog, and the correct native FilePicker will be launched. This is provided through the Windows.Storage.Pickers[] API.
 
     <image of native picker>
 
-- Native menubar
- An interesting feature of some operating systems is the native menu bar, most notably present on Mac OSX. This is a menu bar which is always present, but may change depending on the application currently in focus. Windows 8 introduces a similar concept known as the "charm bar", an access point to various "charms", or integration points for tasks like searching or settings. To enable access to this feature, the native menu system was integrated with the "Settings" charm[]. This allows the developer to create menu items using the existing QMenuBar API. They simply enable the "useNativeMenu" flag, and their menu items appear in settings instead of a widget.
+- *Native menubar*: An interesting feature of some operating systems is the native menu bar, most notably present on Mac OSX. This is a menu bar which is always present, but may change depending on the application currently in focus. Windows 8 introduces a similar concept known as the "charm bar", an access point to various "charms", or integration points for tasks like searching or settings. To enable access to this feature, the native menu system was integrated with the "Settings" charm[]. This allows the developer to create menu items using the existing QMenuBar API. They simply enable the "useNativeMenu" flag, and their menu items appear in settings instead of a widget.
 
     <image of native menu>
 
