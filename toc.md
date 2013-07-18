@@ -14,8 +14,8 @@
   1. [Qt Creator & Tooling](method/tooling.md)
 
 1. Evaluation
-  1. [Evaluation Method]  
-  1. [Evaluation Results]
+  1. [Evaluation Method](evaluation/method.md)
+  1. [Evaluation Results](evaluation/results.md)
 
 1. Discussion
   1. [Discussion](discussion/discussion.md)
