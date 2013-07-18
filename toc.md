@@ -1,5 +1,4 @@
-1. Introduction
-  1. [Qt on Windows Runtime](intro/intro.md)
+1. [Introducing Qt on Windows Runtime](intro/intro.md)
 
 1. Background
   1. [Cross-platform Programming](background/xplatform.md)
