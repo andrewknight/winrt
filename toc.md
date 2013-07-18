@@ -16,8 +16,6 @@
 1. Evaluation
   1. [Evaluation Method](evaluation/method.md)
   1. [Evaluation Results](evaluation/results.md)
-
-1. Discussion
   1. [Discussion](discussion/discussion.md)
 
 1. Appendix
