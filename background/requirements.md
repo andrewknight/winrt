@@ -19,10 +19,8 @@ Beyond the Qt library codebase, there is considerable build system code which al
 ## Considering the Window Manager
 The Windows 8 Modern UI does not use a DWM with traditional window geometry. Rather, it uses more of a tiled approach, whereby application windows cannot be layered or composed atop one another. Instead, applications can be displayed full-screen (one application at a time) or "snapped", that is, docked to the edge of the screen and a fixed width of 320 pixels (the term for the application taking the remaining space is called "filled"). Accordingly, all applications use the full height of the screen and are shown as single, top-level "canvas" with no window decorations. This window may be snapped or hidden, or returned to full-screen (and in the case of screens less than 1366 pixels wide, the window manager doesn't even allow snapping). In effect, the user can only see two running applications at a given time. This allows for basic cross-application use cases (such as drag-and drop), and it encourages applications to provide "[sidebar](/appendix/terms.md#sidebar)"-style use cases while in snapped mode.
 
-<figure>
-    <img src="../images/snapped.png" alt="Snapped Application" /><br />
-    <figcaption>Windows Store apps can be fullscreen, snapped, or filled. Compared to a traditional desktop, window management and resizing is much simpler; Qt applications tend to be most useful with a single, top-level window.</figcaption>
-</figure>
+![Snapped Application](/images/snapped.png)
+^ Windows Store apps can be fullscreen, snapped, or filled. Compared to a traditional desktop, window management and resizing is much simpler; Qt applications tend to be most useful with a single, top-level window.
 
 These paradigm shift can be handled rather easily with QPA. In fact, fewer geometrical possibilities combined with no window chrome or complex compositioning should actually make the windowing system easier to handle than Desktop Windows.
 
@@ -34,10 +32,8 @@ Fortunately, this issue has already been at least partially addressed by the ANG
 ## Other UI details
 Once the aforementioned details are worked out (PIMPLs, platform plugin, and OpenGL), it should be possible to build user interfaces using Qt's existing graphics libraries, Qt Widgets and Qt Quick. From there, it needs to be evaluated what platform style changes are relevant for the new platform. Traditionally, Qt has offered style plugins for customizing the look-and-feel for a given platform (using the Qt Widgets platform). Styled widgets, however, have become less important with the introduction of the canvas-oriented Qt Quick UI framework. Until recently (Qt 5.1), styling Qt Quick components has been up to the developer. With the release of the Qt Quick Controls - a styled, supported Qt Quick component library - this is likely to change as includes a styling API for providing a platform look-and-feel to its components.
 
-<figure>
-    <img src="../images/integration-points.png" alt="Windows 8 Dialogs" /><br />
-    <figcaption>New integration points. Left: Popup (context) menu. Middle: Modal dialog. Right: Settings pane.</figcaption>
-</figure>
+![Windows 8 Dialogs](/images/integration-points.png)
+^ New integration points. Left: Popup (context) menu. Middle: Modal dialog. Right: Settings pane.
 
 Other UIs also exist beyond native look-and-feel of UI components. Context and system menus, for example, are typically defined by the operating system (and not necessarily painted by Qt). Windows 8 has introduces a few new UI concepts that need to be taken into consideration in this arena: popup menus, dialogs, and charms. Popup menus are typically used for contextual changes, and do not support nested menus like in previous versions of Windows. Dialogs are also quite similar to traditional desktop dialogs, but are styled differently and more strictly controlled by the platform (e.g. you cannot place custom widgets inside the dialog). Charms are yet another integration point that applications can use; they can be used for adding platform-consistent settings or search functionality to an application.
 
