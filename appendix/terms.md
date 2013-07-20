@@ -1,3 +1,7 @@
+# Appendix A: Glossary of Terms
+
+This section contains technical terminology referenced within the text, as called out with the "t" notation (<sup>t00</sup>).
+
 #### app
 Diminuitive form of software application. More narrowly, a [GUI](#gui) application for consumption by an end user.
 

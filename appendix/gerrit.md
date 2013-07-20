@@ -1,6 +1,6 @@
 # Gerrit Code Review Changes
 
-This page includes references to relevant code changes through the [openly governed code review system](https://codereview.qt-project.org/).
+This section includes references to relevant code changes through the Qt Project's [openly governed code review system](https://codereview.qt-project.org/), as marked with the "g" notation (<sup>g00</sup>).
 
 #### Make specification
 1. Knight, Andrew. "Initial mkspec and platform detection of WinRT". December 4, 2012. https://codereview.qt-project.org/#change,39875

@@ -14,8 +14,7 @@ QPA, apart from offering the low-level glue between the platform and Qt, also pr
 
     <image of native menu>
 
-- Modern "tray"
- While Windows 8 has no concept of a system "tray" - or notification area - it does offer several new UI elements which cover the same use case. A notification icon is typically displayed next to the clock on a desktop operating system and conveys status (by e.g. changing the icon) of a running application or service. It may also provide popup messages ("balloons") or have an interactive menu. Qt consolidates these cases into the QSystemTrayIcon, which is abstracted in QPA. In order to provide a useful mapping of these features, the following items were implemented:
+- *Modern "system tray"*: While Windows 8 has no concept of a system "tray" - or notification area - it does offer several new UI elements which cover the same use case. A notification icon is typically displayed next to the clock on a desktop operating system and conveys status (by e.g. changing the icon) of a running application or service. It may also provide popup messages ("balloons") or have an interactive menu. Qt consolidates these cases into the QSystemTrayIcon, which is abstracted in QPA. In order to provide a useful mapping of these features, the following items were implemented:
  - Show a menu: Badge menu?
  - Set icon: This sets the application "badge".
  - Show a tooltip: A tooltip can be displayed when hovering over the tray icon. This is not supported, as there is no icon to hover over.

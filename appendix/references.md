@@ -1,3 +1,7 @@
+# Appendix B: Works Cited
+
+This section contains academic, technical, and journalistic references used in the text, as marked with the "r" notation (<sup>r00</sup>).
+
 #### Microsoft and Nokia Announce Partnership
 "Open Letter from CEO Stephen Elop, Nokia and CEO Steve Ballmer, Microsoft". _Nokia Conversations_. February 11, 2011. http://conversations.nokia.com/2011/02/11/open-letter-from-ceo-stephen-elop-nokia-and-ceo-steve-ballmer-microsoft/
 
@@ -52,14 +56,11 @@ http://www.joachim-bauch.de/tutorials/loading-a-dll-from-memory/
 #### OPC: A New Standard For Packaging Your Data. Davis, Jack. August 2007. _MSDN Magazine_.
 http://msdn.microsoft.com/en-us/magazine/cc163372.aspx
 
-
 #### StackOverflow: Is Microsoft.SmartDevice.Connectivity properly COM-registered?
 http://stackoverflow.com/questions/3839947/is-microsoft-smartdevice-connectivity-properly-com-registered
 
-
 #### ANGLE Project: Windows 8 RT App Store Support. Issue discussion. Koch, Daniel (TransGaming Incorporated).
 https://code.google.com/p/angleproject/issues/detail?id=363
-
 
 #### Ayufan: Qt 5 and WinRT
 Trzciński, Kamil. February 2013. _ayufan's site_. http://ayufan.eu/projects/qt5-windows-phone-8/

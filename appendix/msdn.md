@@ -1,3 +1,6 @@
+# MSDN Documentation
+
+This section contains references to relevant Microsoft documentation, as called out with the "m" notation (<sup>m00</sup>).
 
 Win32 CreateCursor
 http://msdn.microsoft.com/en-us/library/ms648385(v=vs.85).aspx
