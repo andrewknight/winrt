@@ -32,3 +32,4 @@ In order for native styling to be adopted in Qt Quick Controls, the developer sh
 
 ## More challenges await
 While not a complete port, building Qt applications on WinRT is now a certain possibility. Enabling ANGLE on more devices, providing offline shader compilation, and providing native styling for Qt Quick Controls will be the largest tasks going forward. Even with these limitations, it is possible to build Qt applications for a variety of use cases, and they can even take advantage of the many integration points that the native platform provides.
+

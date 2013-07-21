@@ -80,3 +80,4 @@ TBD.
 ## Conclude
 
 While not all use cases are yet covered, it is encouraging to see that Qt Creator can be used for most of the development workflow. Developers can create, register, launch, locally debug, and even package their applications using the IDE. From this foundation, it should be possible to evaluated the developer experience offered by the IDE and platform port when working with WinRT devices.
+

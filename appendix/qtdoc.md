@@ -4,3 +4,4 @@ This section contains references to relevant Qt documentation, as called out wit
 
 QFileDialog
 https://qt-project.org/doc/qt-5.0/qtwidgets/qfiledialog.html
+

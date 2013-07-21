@@ -64,3 +64,4 @@ https://code.google.com/p/angleproject/issues/detail?id=363
 
 #### Ayufan: Qt 5 and WinRT
 Trzciński, Kamil. February 2013. _ayufan's site_. http://ayufan.eu/projects/qt5-windows-phone-8/
+
