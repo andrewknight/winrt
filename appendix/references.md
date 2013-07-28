@@ -65,3 +65,5 @@ https://code.google.com/p/angleproject/issues/detail?id=363
 #### Ayufan: Qt 5 and WinRT
 Trzciński, Kamil. February 2013. _ayufan's site_. http://ayufan.eu/projects/qt5-windows-phone-8/
 
+#### Introduction to Windows RT Frameworks
+Kalinowski, Maurice. June 14, 2013. _Qt Blog_. http://blog.qt.digia.com/blog/2013/06/14/introduction-to-windows-rt-frameworks/

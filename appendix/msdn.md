@@ -2,11 +2,17 @@
 
 This section contains references to relevant Microsoft documentation, as called out with the "m" notation (<sup>m00</sup>).
 
+ApplicationViewState
+http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.applicationviewstate.aspx
+
+Guidelines for common user interactions
+http://msdn.microsoft.com/en-us/library/windows/apps/hh465370.aspx
+
 Win32 CreateCursor
-http://msdn.microsoft.com/en-us/library/ms648385(v=vs.85).aspx
+http://msdn.microsoft.com/en-us/library/ms648385.aspx
 
 Windows Web Services API
-http://msdn.microsoft.com/en-us/library/windows/desktop/dd430435(v=vs.85).aspx
+http://msdn.microsoft.com/en-us/library/windows/desktop/dd430435.aspx
 
 Windows.ApplicationModel.Background
 http://msdn.microsoft.com/en-us/library/windows/apps/windows.applicationmodel.background.aspx
