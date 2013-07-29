@@ -92,6 +92,9 @@ Multi-national mobile phone manufacturer headquartered in Espoo, Finland. Former
 #### Open-source
 Refers to a work in which the source material is freely accessible. Open-source software has its source code available so that users can view the internal workings of the software and, in many cases, modify the software under a free license.
 
+#### OpenGL ES 2
+The OpenGL embedded profile, version 2. Hardware graphics API geared toward embedded hardware.
+
 #### PIMPL
 An acronym for **p**rivate **impl**ementation, a programming design pattern which hides implementation details from an external API in order to reduce complexity, improve security, and improve binary/source compatibility through use of an internal API that is opaque to the public interface.
 

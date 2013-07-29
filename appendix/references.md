@@ -59,11 +59,32 @@ http://msdn.microsoft.com/en-us/magazine/cc163372.aspx
 #### StackOverflow: Is Microsoft.SmartDevice.Connectivity properly COM-registered?
 http://stackoverflow.com/questions/3839947/is-microsoft-smartdevice-connectivity-properly-com-registered
 
-#### ANGLE Project: Windows 8 RT App Store Support. Issue discussion. Koch, Daniel (TransGaming Incorporated).
-https://code.google.com/p/angleproject/issues/detail?id=363
+#### ANGLE Project
+Almost Native Graphics Layer Engine. https://code.google.com/p/angleproject/
+
+#### ANGLE Project: Windows 8 RT App Store Support
+Issue discussion. Koch, Daniel (TransGaming Incorporated). https://code.google.com/p/angleproject/issues/detail?id=363
+
+#### Graphics on Windows from a different angle
+Barron, Jason. October 24, 2012. http://blog.qt.digia.com/blog/2012/10/24/graphics-on-windows-from-a-different-angle/
+
+#### OpenGL Insights: ANGLE
+Koch, Daniel and Capens, Nicolas. The ANGLE Project: Implementing OpenGL ES 2.0 on Direct3D. _OpenGL Insights_. Published by CRC Press, July 2012. http://www.seas.upenn.edu/~pcozzi/OpenGLInsights/OpenGLInsights-ANGLE.pdf
 
 #### Ayufan: Qt 5 and WinRT
 Trzciński, Kamil. February 2013. _ayufan's site_. http://ayufan.eu/projects/qt5-windows-phone-8/
 
 #### Introduction to Windows RT Frameworks
 Kalinowski, Maurice. June 14, 2013. _Qt Blog_. http://blog.qt.digia.com/blog/2013/06/14/introduction-to-windows-rt-frameworks/
+
+#### Qt 5 Alpha
+Knoll, Lars. April 3, 2012. _Qt Blog_. http://blog.qt.digia.com/blog/2012/04/03/qt-5-alpha/
+
+#### Scene Graph Adaptation Layer
+Sletta, Gunnar. August 1, 2012. _Qt Blog_. http://blog.qt.digia.com/blog/2012/08/01/scene-graph-adaptation-layer/
+
+#### Evolution of the QML engine, part 1
+Knoll, Lars. April 15th, 2013. _Qt Blog_. http://blog.qt.digia.com/blog/2013/04/15/evolution-of-the-qml-engine-part-1/
+
+#### QML Engine Internals, Part 2: Bindings
+McGuire, Thomas. August 10, 2012. _KDAB_. http://www.kdab.com/qml-engine-internals-part-2-bindings/

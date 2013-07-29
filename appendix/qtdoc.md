@@ -7,3 +7,4 @@ https://qt-project.org/doc/qt-5.1/qtwidgets/qfiledialog.html
 
 PinchArea
 https://qt-project.org/doc/qt-5.1/qtquick/qml-qtquick2-pincharea.html
+

@@ -107,8 +107,14 @@ Knight, Andrew. "Add ScreenRectangle to QInputMethodQuery". NOT YET SUBMITTED
 Knight, Andrew. "WinRT: Introduce Platform Services". April 25, 2013. https://codereview.qt-project.org/#change,54374
 
 ### OpenGL/ANGLE
-1. Knight, Andrew. "Upgrade ANGLE to DX11 Proto". April 8, 2013. https://codereview.qt-project.org/#change,52810
-1. Knight, Andrew. "Patch ANGLE to support WinRT". April 25, 2013. https://codereview.qt-project.org/#change,51857
+#### 52810
+Knight, Andrew. "Upgrade ANGLE to DX11 Proto". April 8, 2013. https://codereview.qt-project.org/#change,52810
+#### 53037
+Knight, Andrew. "ANGLE: Avoid memory copies on buffers when data is null". April 8, 2013. https://codereview.qt-project.org/#change,53037
+#### 52811
+Knight, Andrew. "ANGLE DX11: Prevent assert when view is minimized or size goes to 0x0". April 8, 2013. https://codereview.qt-project.org/#change,52811
+#### 51857
+Knight, Andrew. "Patch ANGLE to support WinRT". April 25, 2013. https://codereview.qt-project.org/#change,51857
 1. Knight, Andrew. "Implement OpenGL ES 2 support for WinRT QPA". April 27, 2013. https://codereview.qt-project.org/#change,51858
 
 
