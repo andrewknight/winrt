@@ -1,6 +1,6 @@
 # MSDN Documentation
 
-This section contains references to relevant Microsoft documentation, as called out with the "m" notation (<sup>m00</sup>).
+This section contains references to relevant Microsoft documentation, as called out with the <sup>M</sup> notation.
 
 #### ApplicationViewState
 http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.applicationviewstate.aspx
@@ -22,6 +22,45 @@ http://msdn.microsoft.com/en-us/library/windows/desktop/aa366781(v=vs.85).aspx
 
 #### Windows 8 app certification requirements
 http://msdn.microsoft.com/en-us/library/windows/apps/hh694083.aspx
+
+#### Windows.UI.Popups namespace
+http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.popups.aspx
+
+#### Windows.Storage.Pickers
+http://msdn.microsoft.com/en-us/library/windows/apps/windows.storage.pickers.provider.aspx
+
+#### Charms
+http://windows.microsoft.com/en-US/windows-8/charms
+
+#### Capability
+http://msdn.microsoft.com/en-us/library/windows/apps/br211423.aspx
+
+#### DeviceCapability
+http://msdn.microsoft.com/en-us/library/windows/apps/br211430.aspx
+
+#### Dependencies
+http://msdn.microsoft.com/en-us/library/windows/apps/br211428.aspx
+
+#### App Installation Cmdlets in Windows PowerShell
+http://technet.microsoft.com/en-us/library/hh856045.aspx
+
+#### PLMDebug
+http://msdn.microsoft.com/en-us/library/windows/hardware/jj680085.aspx
+
+#### IApplicationActivationManager interface
+http://msdn.microsoft.com/en-us/library/windows/desktop/hh706902.aspx
+
+#### Core Connectivity
+http://msdn.microsoft.com/en-us/library/ee480472.aspx
+
+#### How to deploy and run a Windows Phone app
+http://msdn.microsoft.com/en-us/library/windowsphone/develop/ff402565.aspx#BKMK_tool
+
+#### Running Windows Store apps on a remote machine
+http://msdn.microsoft.com/en-us/library/vstudio/hh441469.aspx#BKMK_Install
+
+#### Windows Remote Management
+http://msdn.microsoft.com/en-us/library/windows/desktop/aa384426.aspx
 
 Win32 CreateCursor
 http://msdn.microsoft.com/en-us/library/ms648385.aspx

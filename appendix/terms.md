@@ -1,6 +1,6 @@
 # Appendix A: Glossary of Terms
 
-This section contains technical terminology referenced within the text, as called out with the "t" notation (<sup>t00</sup>).
+This section contains technical terminology referenced within the text, as called out with the <sup>⌘</sup> notation.
 
 #### app
 Diminuitive form of software application. More narrowly, a [GUI](#gui) application for consumption by an end user.
@@ -126,7 +126,7 @@ The graphical user interface base module in Qt, providing basic window/screen in
 The module providing network access and socket communication capabilities.
 
 #### Qt Project
-The openly-governed foundation for the continued development of Qt. [_qt-project.org_](http://qt-project.org)
+The openly-governed foundation for the continued development of Qt. [*qt-project.org*](http://qt-project.org)
 
 #### Qt Quick
 The "Qt User Interface Kit" module in Qt 5, providing a selection an OpenGL-based scene graph and a collection of basic components for authoring UIs in [QML](#qml).
