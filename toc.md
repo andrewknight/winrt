@@ -17,8 +17,8 @@
 1. [Discussion](discussion/discussion.md)
 1. Appendix
   1. [Terms](appendix/terms.md)  
-  1. [Snippets](appendix/snippets.md)
-  1. [References](appendix/references.md)
-  1. [Index](appendix/index.md)
-
+  1. [Works Cited](appendix/references.md)
+  1. [Qt Project Code Review](appendix/gerrit.md)
+  1. [Microsoft Developer Documentation References](appendix/msdn.md)
+  1. [Qt Developer Documentation References](appendix/qdoc.md)
 

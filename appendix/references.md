@@ -80,6 +80,9 @@ Kalinowski, Maurice. June 14, 2013. *Qt Blog*. http://blog.qt.digia.com/blog/201
 #### Qt 5 Alpha
 Knoll, Lars. April 3, 2012. *Qt Blog*. http://blog.qt.digia.com/blog/2012/04/03/qt-5-alpha/
 
+#### Qt 5.1 Released
+Knoll, Lars. July 3, 2013. *Qt Blog*. http://blog.qt.digia.com/blog/2013/07/03/qt-5-1-released/
+
 #### Scene Graph Adaptation Layer
 Sletta, Gunnar. August 1, 2012. *Qt Blog*. http://blog.qt.digia.com/blog/2012/08/01/scene-graph-adaptation-layer/
 
