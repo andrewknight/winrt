@@ -1,4 +1,4 @@
-# Contents
+# Case Study: Qt Integration with Windows Runtime
 
 1. [Introducing Qt on Windows Runtime](intro/intro.md)
 1. Background

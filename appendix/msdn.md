@@ -2,6 +2,9 @@
 
 This section contains references to relevant Microsoft documentation, as called out with the <sup>M</sup> notation.
 
+#### CRT functions not supported with /ZW
+http://msdn.microsoft.com/en-us/library/windows/apps/jj606124.aspx
+
 #### ApplicationViewState
 http://msdn.microsoft.com/en-us/library/windows/apps/windows.ui.viewmanagement.applicationviewstate.aspx
 
@@ -62,6 +65,10 @@ http://msdn.microsoft.com/en-us/library/vstudio/hh441469.aspx#BKMK_Install
 #### Windows Remote Management
 http://msdn.microsoft.com/en-us/library/windows/desktop/aa384426.aspx
 
+#### Windows.Devices.Input namespace
+http://msdn.microsoft.com/en-us/library/windows/apps/windows.devices.input.aspx
+
+## FIXME: Uncategorized/unused
 Win32 CreateCursor
 http://msdn.microsoft.com/en-us/library/ms648385.aspx
 
